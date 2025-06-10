@@ -29,8 +29,8 @@ export default function Home() {
         const data = await response.json()
         setItems(data)
       }
-    } catch (error) {
-      console.error('Error fetching items:', error)
+    } catch{
+      console.error('Error fetching items:')
     } finally {
       setLoading(false)
     }
