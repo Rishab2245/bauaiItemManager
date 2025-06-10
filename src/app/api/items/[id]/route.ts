@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
 import { PrismaClient } from "@prisma/client"
 import { getServerSession } from "next-auth"
-import { authOptions } from "../../auth/[...nextauth]/route"
+import { authOptions } from "@/lib/auth.config"
 
 const prisma = new PrismaClient()
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -19,7 +19,9 @@ export async function DELETE(
       )
     }
 
-    const itemId = parseInt(params.id)
+    // Await the params Promise
+    const resolvedParams = await params
+    const itemId = parseInt(resolvedParams.id)
     
     // Check if item exists and belongs to the user
     const item = await prisma.item.findUnique({
@@ -53,4 +55,3 @@ export async function DELETE(
     )
   }
 }
-
