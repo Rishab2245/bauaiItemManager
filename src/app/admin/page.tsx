@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from "next/link";
 
 export default function AdminPage() {
   const [name, setName] = useState('')
@@ -39,6 +40,7 @@ export default function AdminPage() {
     } catch (error) {
       setMessage('An error occurred. Please try again.')
       setMessageType('error')
+      console.error('Error creating user:', error)
     } finally {
       setIsLoading(false)
     }
@@ -124,12 +126,12 @@ export default function AdminPage() {
           </form>
 
           <div className="mt-6 pt-6 border-t border-gray-200">
-            <a
+            <Link
               href="/"
               className="text-blue-600 hover:text-blue-500 text-sm font-medium"
             >
               ← Back to Main Application
-            </a>
+            </Link>
           </div>
         </div>
       </div>

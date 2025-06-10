@@ -2,8 +2,14 @@
 
 import { useState } from 'react'
 
+type Item = {
+  id: string
+  title: string
+  description: string
+  createdAt?: string
+}
 interface ItemFormProps {
-  onItemCreated: (item: any) => void
+  onItemCreated: (item: Item) => void
 }
 
 export function ItemForm({ onItemCreated }: ItemFormProps) {
