@@ -1,13 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-
-type Item = {
-  id: string
+interface Item {
+  id: number
   title: string
   description: string
-  createdAt?: string
+  createdAt: string
+  createdBy: number
+  user: {
+    name: string
+    email: string
+  }
 }
+
 interface ItemFormProps {
   onItemCreated: (item: Item) => void
 }
