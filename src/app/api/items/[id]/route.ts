@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
 import { PrismaClient } from "@prisma/client"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth.config"
+import type { Session } from "next-auth";
+
 
 const prisma = new PrismaClient()
 
@@ -10,7 +12,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions)
+const session: Session | null = await getServerSession(authOptions);
     
     if (!session?.user?.id) {
       return NextResponse.json(
